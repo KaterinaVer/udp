@@ -12,9 +12,7 @@ public class Client {
 
     private static byte[] buf = new byte[1024];
 
-    public Client() throws SocketException, UnknownHostException {
-        //socket = new DatagramSocket();
-        //address = InetAddress.getByName("localhost");
+    public Client() {
     }
 
     public static void main(String[] args) throws IOException {
@@ -42,7 +40,6 @@ public class Client {
                 str = "Dispatch string:" + str;
                 writeToLog(str, writer);
                 String message = "";
-                boolean numeric = false;
                 while (true) {
                     packet = new DatagramPacket(buf, buf.length);
                     socket.receive(packet);
@@ -53,6 +50,7 @@ public class Client {
                         Integer.parseInt(received);
                         break;
                     } catch (NumberFormatException e) {
+
                     }
                     message += received;
                 }
@@ -66,22 +64,6 @@ public class Client {
         writer.write(str);
         writer.append('\n');
         writer.flush();
-    }
-
-    public String sendEcho(String msg) throws IOException {
-        buf = msg.getBytes();
-        DatagramPacket packet
-                = new DatagramPacket(buf, buf.length, address, port);
-        socket.send(packet);
-        packet = new DatagramPacket(buf, buf.length);
-        socket.receive(packet);
-        String received = new String(
-                packet.getData(), 0, packet.getLength());
-        return received;
-    }
-
-    public void close() {
-        socket.close();
     }
 }
 /*public class Client {

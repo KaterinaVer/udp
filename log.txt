@@ -1,2 +1,2 @@
-Start connection:Sat Apr 27 20:19:08 MSK 2019
-Dispatch string:load file.txt
+Start connection:Sat Apr 27 20:36:53 MSK 2019
+Dispatch string:lohcl

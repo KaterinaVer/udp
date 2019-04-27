@@ -35,15 +35,19 @@ public class Server extends Thread {
                 System.out.println(received);
 
                 String[] inputString = received.split(" ");
-                String fileName = inputString[1].trim();
                 if (inputString[0].equals("load")) {
+                    String fileName = inputString[1].trim();
                     String message = readFromFile(fileName);
                     if (message.isEmpty()) {
-                        send("Connection was closed", address, port);
+                        send("File was not found! Connection was closed", address, port);
                         socket.close();
                     } else {
                         send("Text from file:" + message, address, port);
                     }
+                }
+                else{
+                    send("Command was not found! Connection was closed", address, port);
+                    socket.close();
                 }
                 running = false;
             } catch (IOException e) {
@@ -54,7 +58,7 @@ public class Server extends Thread {
         socket.close();
     }
 
-    public String readFromFile(String fileName) {
+    public String readFromFile(String fileName) throws IOException {
         String message = "";
 
         try {
@@ -66,16 +70,13 @@ public class Server extends Thread {
 
         } catch (FileNotFoundException e) {
             System.out.println("File was not found!");
-            //out.println("File was not found!");
             message = "";
-        } catch (IOException e) {
-            System.out.println("Error!");
         }
         return message;
     }
 
     public void send(String msg, InetAddress address, int port) throws IOException {
-        String[] message = msg.split("(?<=\\G.{10})");
+        String[] message = msg.split("(?<=\\G.{6})");
         DatagramPacket packet;
         for (String m : message) {
             buf = m.getBytes();
