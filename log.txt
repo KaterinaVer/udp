@@ -1,2 +1,6 @@
-Start connection:Sat Apr 27 20:36:53 MSK 2019
-Dispatch string:lohcl
+Start connection:Mon Apr 29 11:52:16 MSK 2019
+Dispatch string:fghjhlk;b
+Dispatch time:Mon Apr 29 11:52:21 MSK 2019
+Receipt time:Mon Apr 29 11:52:21 MSK 2019
+Receipt string:Command was not found! Connection was closed
+End connection:Mon Apr 29 11:52:21 MSK 2019
